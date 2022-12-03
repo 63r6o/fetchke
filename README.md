@@ -14,4 +14,4 @@ $ time ./fetchke
 
 ## ✔️ TODO
 - [ ] make it customizable using command line arguments
-- [ ] test other platforms
+- [x] test other platforms
