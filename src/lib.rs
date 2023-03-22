@@ -38,19 +38,32 @@ impl DeviceData {
     }
 }
 
+impl Default for DeviceData {
+     fn default() -> Self {
+         Self::new()
+     }
+}
+
 pub mod printer {
     use ansi_term::Style;
 
-    pub fn print_rendered(rendered_info: &[(&str, &String)], decor: &String, title_style: &Style) {
-        for (i, item) in rendered_info.iter().enumerate() {
-            match i {
-                0 | 1 => println!("{}  {}", decor, item.1),
-                _ => {
-                    let line = format!("{}  {}: {}", decor, title_style.paint(item.0), item.1);
-                    println!("{}", line);
-                }
-            }
-        }
+    pub fn print_rendered(rendered_info: &[(&str, String)], decor: &String, title_style: &Style) {
+        rendered_info.iter().take(2).for_each(|item| {
+            println!("{}  {}", decor, item.1);
+        });
+
+        rendered_info.iter().skip(2).for_each(|item| {
+            let line = format!("{}  {}: {}", decor, title_style.paint(item.0), item.1);
+            println!("{}", line); 
+        })
+    }
+
+    pub fn print_rendered_exclude(rendered_info: &[(&str, String)], decor: &String, title_style: &Style, exclude: &[String]) {
+        let excluded_info_to_render: Vec<(&str, String)> = rendered_info.iter().cloned().filter(|&(name, _)| {
+            !exclude.contains(&name.to_string())
+        }).collect();
+    
+        print_rendered(&excluded_info_to_render, decor, title_style)
     }
 }
 
