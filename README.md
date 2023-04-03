@@ -6,7 +6,7 @@ A minimalistic system information tool written in Rust.
 ## 🤔 why?
 Because I'm learning Rust.
 ## 🚀 is it fast?
-Yep, it seems quite fast:
+BlAzInGlY
 ```
 $ time ./fetchke
 > ./fetchke  0.01s user 0.03s system 86% cpu 0.056 total
